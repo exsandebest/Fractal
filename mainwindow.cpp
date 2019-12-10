@@ -1,15 +1,12 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include<algorithm>
 #include<QPainter>
 #include<QDebug>
 #include<QColor>
 #include<QMouseEvent>
 #include<QPoint>
 #include<QImage>
-#include<QRect>
 #include "complex.h"
-#include <QDebug>
 #include <bits/stdc++.h>
 
 const int iterations = 500;
@@ -44,9 +41,6 @@ MainWindow::MainWindow(QWidget *parent)
     if (colorReverse){
         std::reverse(colors, colors+109);
     }
-//    for (int i = 0; i <= iterations; ++i){
-//        qDebug() << i << " : " << colors[i];
-//    }
 
 
     image = new QImage(2*displaysize+1, 2*displaysize+1, QImage::Format_RGB32);
