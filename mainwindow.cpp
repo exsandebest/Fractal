@@ -38,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
     this -> setMinimumSize(2*displaysize+1, 2*displaysize+1);
     this -> setMaximumSize(2*displaysize+1, 2*displaysize+1);
     for (int i = 30, j = 0; j <= iterations; i+=3, ++j){
-        colors[j] = (i <= 360) ? QColor::fromHsl(i, 200, 127).name() : colors[j-1];
+        colors[j] = (i <= 360) ? QColor::fromHsl(i, 210, 127).name() : colors[j-1];
     }
 
     image = new QImage(2*displaysize+1, 2*displaysize+1, QImage::Format_RGB32);
