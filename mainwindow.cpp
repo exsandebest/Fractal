@@ -12,7 +12,7 @@
 #include <QDebug>
 #include <bits/stdc++.h>
 
-const int iterations = 300;
+const int iterations = 500;
 const int displaysize = 500;
 const double eps = 1e-8;
 
@@ -27,6 +27,7 @@ bool isPressed = false;
 QImage * image;
 int imagecopy[2*(displaysize+1)][2*(displaysize+1)];
 bool isLine = false;
+bool colorReverse = true;
 
 
 
@@ -40,6 +41,13 @@ MainWindow::MainWindow(QWidget *parent)
     for (int i = 30, j = 0; j <= iterations; i+=3, ++j){
         colors[j] = (i <= 360) ? QColor::fromHsl(i, 210, 127).name() : colors[j-1];
     }
+    if (colorReverse){
+        std::reverse(colors, colors+109);
+    }
+//    for (int i = 0; i <= iterations; ++i){
+//        qDebug() << i << " : " << colors[i];
+//    }
+
 
     image = new QImage(2*displaysize+1, 2*displaysize+1, QImage::Format_RGB32);
 }
