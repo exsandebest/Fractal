@@ -26,6 +26,7 @@ double step = 2.0 / double(displaysize);
 bool isPressed = false;
 QImage * image;
 int imagecopy[2*(displaysize+1)][2*(displaysize+1)];
+bool isLine = false;
 
 
 
@@ -92,6 +93,10 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event) {
     }
 
     int dx = pointEnd.x() - pointBegin.x(), dy = abs(pointEnd.y() - pointBegin.y());
+    if (dx == 0 || dy == 0){
+        repaint();
+        return;
+    }
     if (dx > 0) {
         if (dy != 0) {
             xstart = double(qMin(pointEnd.x(), pointBegin.x()))*step + xstart;
