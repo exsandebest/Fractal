@@ -18,9 +18,11 @@
 
 #include <bits/stdc++.h>
 
-const int iterations = 500;
+const int iterations = 300;
 const int displaysize = 500;
 const double eps = 1e-8;
+
+QColor borderColor = Qt::white;
 
 QColor colors[iterations + 1];
 QPoint pointBegin, pointEnd, pointTmp;
@@ -32,7 +34,7 @@ bool isPressed = false;
 QImage * image;
 int imagecopy[2 * (displaysize + 1)][2 * (displaysize + 1)];
 bool isLine = false;
-bool colorReverse = false;
+bool colorReverse = true;
 
 MainWindow::MainWindow(QWidget * parent): QMainWindow(parent), ui(new Ui::MainWindow) {
     ui -> setupUi(this);
@@ -135,12 +137,12 @@ void MainWindow::paintEvent(QPaintEvent * event) {
         py2 = displaysize - qMin(pointBegin.y(), pointEnd.y());
 
         for (int i = px1; i <= px2; ++i) {
-            image -> setPixelColor(i + displaysize, displaysize + py1, Qt::black);
-            image -> setPixelColor(i + displaysize, displaysize + py2, Qt::black);
+            image -> setPixelColor(i + displaysize, displaysize + py1, borderColor);
+            image -> setPixelColor(i + displaysize, displaysize + py2, borderColor);
         }
         for (int i = py1; i <= py2; ++i) {
-            image -> setPixelColor(px1 + displaysize, displaysize + i, Qt::black);
-            image -> setPixelColor(px2 + displaysize, displaysize + i, Qt::black);
+            image -> setPixelColor(px1 + displaysize, displaysize + i, borderColor);
+            image -> setPixelColor(px2 + displaysize, displaysize + i, borderColor);
         }
         painter.drawImage(QPoint(-displaysize, -displaysize), * image);
         return;
