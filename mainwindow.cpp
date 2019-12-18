@@ -46,9 +46,7 @@ MainWindow::MainWindow(QWidget * parent): QMainWindow(parent), ui(new Ui::MainWi
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
-    qDebug()<<event->key();
     if(event->key() == 16777220){
-        qDebug() <<"lol";
         xstart = -2;
         ystart = -2;
         step = 2.0 / double(displaysize);
@@ -104,7 +102,6 @@ void MainWindow::mouseReleaseEvent(QMouseEvent * event) {
         repaint();
         return;
     }
-    qDebug() << pointBegin << pointEnd;
     if (dx > 0) {
         if (dy != 0) {
             xstart = double(qMin(pointEnd.x(), pointBegin.x())) * step + xstart;
