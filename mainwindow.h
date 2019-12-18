@@ -21,6 +21,8 @@ protected:
     void mousePressEvent(QMouseEvent * event);
     void mouseReleaseEvent(QMouseEvent * event);
     void mouseMoveEvent(QMouseEvent * event);
+    void keyPressEvent(QKeyEvent *event);
+
 private:
     Ui::MainWindow *ui;
 };

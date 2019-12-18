@@ -1,28 +1,19 @@
 #include "mainwindow.h"
-
 #include "ui_mainwindow.h"
-
 #include<QPainter>
-
 #include<QDebug>
-
 #include<QColor>
-
 #include<QMouseEvent>
-
 #include<QPoint>
-
 #include<QImage>
-
 #include "complex.h"
-
 #include <bits/stdc++.h>
 
 const int iterations = 300;
 const int displaysize = 500;
 const double eps = 1e-8;
 
-QColor borderColor = Qt::white;
+
 
 QColor colors[iterations + 1];
 QPoint pointBegin, pointEnd, pointTmp;
@@ -34,6 +25,8 @@ bool isPressed = false;
 QImage * image;
 int imagecopy[2 * (displaysize + 1)][2 * (displaysize + 1)];
 bool isLine = false;
+
+QColor borderColor = Qt::white;
 bool colorReverse = true;
 
 MainWindow::MainWindow(QWidget * parent): QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -41,13 +34,27 @@ MainWindow::MainWindow(QWidget * parent): QMainWindow(parent), ui(new Ui::MainWi
     this -> setMinimumSize(2 * displaysize + 1, 2 * displaysize + 1);
     this -> setMaximumSize(2 * displaysize + 1, 2 * displaysize + 1);
     for (int i = 30, j = 0; j <= iterations; i += 3, ++j) {
-        colors[j] = (i <= 360) ? QColor::fromHsl(i, 210, 127).name() : colors[j - 1];
-    }
-    if (colorReverse) {
-        std::reverse(colors, colors + 109);
+            colors[j] = (i <= 360) ? QColor::fromHsl(i, 210, 127).name() : colors[j - 1];
+        }
+        if (colorReverse) {
+            std::reverse(colors, colors + 109);
+        }
+    image = new QImage(2 * displaysize + 1, 2 * displaysize + 1, QImage::Format_RGB32);
+}
+
+
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    qDebug()<<event->key();
+    if(event->key() == 16777220){
+        qDebug() <<"lol";
+        xstart = -2;
+        ystart = -2;
+        step = 2.0 / double(displaysize);
+        repaint();
     }
 
-    image = new QImage(2 * displaysize + 1, 2 * displaysize + 1, QImage::Format_RGB32);
 }
 
 MainWindow::~MainWindow() {
@@ -70,6 +77,7 @@ void MainWindow::mousePressEvent(QMouseEvent * event) {
     isPressed = true;
     pointEnd = pointBegin = event -> pos();
 }
+
 
 void MainWindow::mouseMoveEvent(QMouseEvent * event) {
     if (!isPressed) {
@@ -96,6 +104,7 @@ void MainWindow::mouseReleaseEvent(QMouseEvent * event) {
         repaint();
         return;
     }
+    qDebug() << pointBegin << pointEnd;
     if (dx > 0) {
         if (dy != 0) {
             xstart = double(qMin(pointEnd.x(), pointBegin.x())) * step + xstart;
