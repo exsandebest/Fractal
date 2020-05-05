@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include<QPainter>
-#include<QDebug>
 #include<QColor>
 #include<QMouseEvent>
 #include<QPoint>
@@ -9,12 +8,14 @@
 #include "complex.h"
 #include <bits/stdc++.h>
 
-const int iterations = 300;
-const int displaysize = 500;
+//settings
+const int iterations = 350;
+const QColor borderColor = Qt::white;
+const bool colorReverse = false;
+//settings
+
 const double eps = 1e-8;
-
-
-
+const int displaysize = 500;
 QColor colors[iterations + 1];
 QPoint pointBegin, pointEnd, pointTmp;
 
@@ -26,8 +27,7 @@ QImage * image;
 int imagecopy[2 * (displaysize + 1)][2 * (displaysize + 1)];
 bool isLine = false;
 
-QColor borderColor = Qt::white;
-bool colorReverse = true;
+
 
 MainWindow::MainWindow(QWidget * parent): QMainWindow(parent), ui(new Ui::MainWindow) {
     ui -> setupUi(this);
