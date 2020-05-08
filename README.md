@@ -15,4 +15,4 @@ Simple **Mandelbrot set** with zoom on **Qt**
 ![](https://raw.githubusercontent.com/exsandebest/Fractal/master/examples/screenshots/3.png)
 ## Authors
 * [klimkomx](https://github.com/klimkomx)
-* exsandebest
+* [exsandebest](https://github.com/exsandebest)
