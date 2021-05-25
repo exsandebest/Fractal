@@ -1,12 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include<QPainter>
-#include<QColor>
-#include<QMouseEvent>
-#include<QPoint>
-#include<QImage>
+#include <QPainter>
+#include <QMouseEvent>
 #include "complex.h"
-#include <bits/stdc++.h>
 
 //settings
 const int iterations = 350;
@@ -27,32 +23,28 @@ QImage * image;
 int imagecopy[2 * (displaysize + 1)][2 * (displaysize + 1)];
 bool isLine = false;
 
-
-
 MainWindow::MainWindow(QWidget * parent): QMainWindow(parent), ui(new Ui::MainWindow) {
-    ui -> setupUi(this);
-    this -> setMinimumSize(2 * displaysize + 1, 2 * displaysize + 1);
-    this -> setMaximumSize(2 * displaysize + 1, 2 * displaysize + 1);
+    ui->setupUi(this);
+    this->setMinimumSize(2 * displaysize + 1, 2 * displaysize + 1);
+    this->setMaximumSize(2 * displaysize + 1, 2 * displaysize + 1);
     for (int i = 30, j = 0; j <= iterations; i += 3, ++j) {
-            colors[j] = (i <= 360) ? QColor::fromHsl(i, 210, 127).name() : colors[j - 1];
-        }
-        if (colorReverse) {
-            std::reverse(colors, colors + 109);
-        }
+        colors[j] = (i <= 360) ? QColor::fromHsl(i, 210, 127).name() : colors[j - 1];
+    }
+    if (colorReverse) {
+        std::reverse(colors, colors + 109);
+    }
     image = new QImage(2 * displaysize + 1, 2 * displaysize + 1, QImage::Format_RGB32);
 }
 
 
 
-void MainWindow::keyPressEvent(QKeyEvent *event)
-{
+void MainWindow::keyPressEvent(QKeyEvent *event) {
     if(event->key() == 16777220){
         xstart = -2;
         ystart = -2;
         step = 2.0 / double(displaysize);
         repaint();
     }
-
 }
 
 MainWindow::~MainWindow() {
@@ -78,9 +70,7 @@ void MainWindow::mousePressEvent(QMouseEvent * event) {
 
 
 void MainWindow::mouseMoveEvent(QMouseEvent * event) {
-    if (!isPressed) {
-        return;
-    }
+    if (!isPressed) return;
     pointTmp = event -> pos();
     if (pointTmp.x() < 0 || pointTmp.y() < 0 || pointTmp.x() > 2 * displaysize || pointTmp.y() > 2 * displaysize) {
         return;
@@ -119,7 +109,8 @@ void MainWindow::mouseReleaseEvent(QMouseEvent * event) {
     }
 }
 
-void MainWindow::paintEvent(QPaintEvent * event) {
+void MainWindow::paintEvent(QPaintEvent *event) {
+    Q_UNUSED(event)
     QPainter painter(this);
     painter.translate(displaysize, displaysize);
     painter.scale(1, -1);
@@ -163,5 +154,4 @@ void MainWindow::paintEvent(QPaintEvent * event) {
         }
     }
     painter.drawImage(QPoint(-displaysize, -displaysize), * image);
-    return;
 }

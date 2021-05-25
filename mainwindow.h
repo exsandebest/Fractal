@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <complex.h>
+#include "complex.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -15,7 +15,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    int pointCheck(complex & c);
+    int pointCheck(complex &c);
+
 protected:
     void paintEvent(QPaintEvent * event);
     void mousePressEvent(QMouseEvent * event);

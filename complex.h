@@ -1,32 +1,32 @@
 #ifndef COMPLEX_H
 #define COMPLEX_H
 #include <math.h>
+#include <utility>
 
 class complex {
 public:
-    double r,i;
-    complex(double re, double im){
-        r = re;
-        i = im;
-    }
-    complex(const complex & c){
-        r = c.r;
-        i = c.i;
-    }
+    double r;
+    double i;
+    complex(double r, double i): r(r), i(i) {}
+    complex(const complex &c): r(c.r), i(c.i) {}
     ~complex(){}
 
-    complex operator+(complex & c){
-
+    complex operator+(complex &c) {
         return complex(this->r + c.r, this->i + c.i);
     }
-    complex operator-(complex & c){
+    complex operator-(complex &c) {
         return complex(this->r - c.r, this->i - c.i);
     }
-    complex operator*(complex & c){
-        return complex(this -> r * c.r - this -> i * c.i, this -> i * c.r + this -> r * c.i);
+    complex operator*(complex &c) {
+        return complex(this->r * c.r - this->i * c.i, this->i * c.r + this->r * c.i);
     }
-    double v(){
-        return sqrt(r*r+i*i);
+    complex& operator=(complex c) {
+        std::swap(this->i, c.i);
+        std::swap(this->r, c.r);
+        return *this;
+    }
+    double v() {
+        return sqrt(r*r + i*i);
     }
 };
 
